@@ -34,6 +34,10 @@ const styles = theme => ({
   },
   button: {
     margin: "0 0.5rem"
+  },
+  
+  hide: {
+	display: "none"
   }
 });
 
