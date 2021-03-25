@@ -6,6 +6,9 @@ const styles = theme => ({
   root: {
     display: "flex"
   },
+  hide: {
+    display: "none"
+  },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
@@ -33,7 +36,7 @@ const styles = theme => ({
     "& a": {
       textDecoration: "none"
     },
-	[sizes.down("xs")]: {
+    [sizes.down("xs")]: {
       marginRight: "0.5rem"
     }
   },
@@ -43,10 +46,6 @@ const styles = theme => ({
       margin: "0 0.2rem",
       padding: "0.3rem"
     }
-  },
-  
-  hide: {
-	display: "none"
   }
 });
 
