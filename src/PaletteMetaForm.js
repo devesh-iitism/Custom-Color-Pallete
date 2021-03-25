@@ -17,7 +17,7 @@ class PaletteMetaForm extends Component {
       newPaletteName: ""
     };
     this.handleChange = this.handleChange.bind(this);
-	this.showEmojiPicker = this.showEmojiPicker.bind(this);
+    this.showEmojiPicker = this.showEmojiPicker.bind(this);
     this.savePalette = this.savePalette.bind(this);
   }
   componentDidMount() {
@@ -32,19 +32,17 @@ class PaletteMetaForm extends Component {
       [evt.target.name]: evt.target.value
     });
   }
-	
   showEmojiPicker() {
     this.setState({ stage: "emoji" });
   }
-	
   savePalette(emoji) {
     const newPalette = {
       paletteName: this.state.newPaletteName,
       emoji: emoji.native
     };
     this.props.handleSubmit(newPalette);
+    this.setState({ stage: "" });
   }
-	
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -54,32 +52,33 @@ class PaletteMetaForm extends Component {
   };
 
   render() {
-    const { newPaletteName } = this.state;
-	const { hideForm, handleSubmit } = this.props;
+    const { newPaletteName, stage } = this.state;
+    const { hideForm } = this.props;
 
     return (
-	     <div>
-			<Dialog open={this.state.stage === "emoji"} onClose={hideForm}>
-			  <DialogTitle id='form-dialog-title'>
-				Choose a Palette Emoji
-			  </DialogTitle>
-			  <Picker title='Pick a Palette Emoji' onSelect={this.savePalette} />
-			</Dialog>
-			<Dialog
-			  open={this.state.stage === "form"}
-			  aria-labelledby='form-dialog-title'
-			  onClose={hideForm}
-			>
-			  <DialogTitle id='form-dialog-title'>
-				Choose a Palette Name
-			  </DialogTitle>
-			  <ValidatorForm onSubmit={this.showEmojiPicker}>
-				<DialogContent>
-				  <DialogContentText>
-					Please enter a name for your new beautiful palette. Make sure
-					it's unique!
-				  </DialogContentText>
-            <TextValidator
+      <div>
+        <Dialog open={stage === "emoji"} onClose={hideForm}>
+          <DialogTitle id='form-dialog-title'>
+            Choose a Palette Emoji
+          </DialogTitle>
+          <Picker title='Pick a Palette Emoji' onSelect={this.savePalette} />
+        </Dialog>
+        <Dialog
+          open={stage === "form"}
+          aria-labelledby='form-dialog-title'
+          onClose={hideForm}
+        >
+          <DialogTitle id='form-dialog-title'>
+            Choose a Palette Name
+          </DialogTitle>
+          <ValidatorForm onSubmit={this.showEmojiPicker}>
+            <DialogContent>
+              <DialogContentText>
+                Please enter a name for your new beautiful palette. Make sure
+                it's unique!
+              </DialogContentText>
+
+              <TextValidator
                 label='Palette Name'
                 value={newPaletteName}
                 name='newPaletteName'
